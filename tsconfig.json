@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "lib": ["dom"],
+    "target": "es2018",
+    "module": "commonjs",
+    "jsx": "react"
+  }
+}
