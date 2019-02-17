@@ -17,6 +17,10 @@ import { CONFIG } from '../config';
 import Tokens from '../stores/tokens';
 import { BigIntType, bi, ZERO, greaterThan, lessThanOrEqual } from 'jsbi-utils';
 
+
+const mainnetLambda = "https://pz3ks5l8tb.execute-api.eu-west-1.amazonaws.com/mainnet/claim";
+const testnetLamdba = "https://c90vfqfc1l.execute-api.eu-west-1.amazonaws.com/testnet/claim";
+
 const Big = require('big.js');
 
 interface Params {
@@ -62,13 +66,16 @@ export default class Claim extends React.Component<ClaimProps> {
 
   init() {
     return new Promise((resolve, reject) => {
-      console.log(this.props.account.address);
-      setTimeout(() => resolve(), 5000);
+      setInterval(() => {
+        if(this.props.account.ready) {
+          resolve()
+        }
+      }, 1000)
     })
     .then(() => {
       console.log("BEFORE FETCH");
       console.log(this.props.account.address);
-      return fetch("https://c90vfqfc1l.execute-api.eu-west-1.amazonaws.com/testnet/claim", {
+      return fetch(mainnetLambda, {
           method: "POST", 
           headers: {
               "Content-Type": "application/json",
@@ -123,7 +130,7 @@ export default class Claim extends React.Component<ClaimProps> {
             <div>
               <h1> You got {Big(this.amount.toString() || 0).div(10 ** 18).toFixed()} LEAP! </h1> <br /> <br />
               <img src="https://s3-eu-west-1.amazonaws.com/redenvelope.me/red+envelope4.jpg" /> <br /> <br />
-              <Button style={style} onClick={() => {window.location = "https://testnet.leapdao.org/wallet" as any}}> MANAGE FUNDS </Button> <br /> <br />
+              <Button style={style} onClick={() => {window.location = "https://mainnet.leapdao.org/wallet" as any}}> MANAGE FUNDS </Button> <br /> <br />
               <Button> <Link to={`/fundenvelope/0.01/3`}>FUND YOUR OWN ENVELOPE</Link></Button>
             </div>
           )}
@@ -131,7 +138,7 @@ export default class Claim extends React.Component<ClaimProps> {
             <div>
               <h1> Better luck next time! </h1> <br /> <br />
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7m3VLlfMcRJ2c-RlcXdAJk-PKqg5s9iAi3uLxiEnjPJq-bFGq" /> <br /> <br />
-              <Button style={style} onClick={() => {window.location = "https://testnet.leapdao.org/wallet" as any}}> MANAGE FUNDS </Button> <br /> <br />
+              <Button style={style} onClick={() => {window.location = "https://mainnet.leapdao.org/wallet" as any}}> MANAGE FUNDS </Button> <br /> <br />
               <Button> <Link to={`/fundenvelope/0.01/3`}> FUND YOUR OWN ENVELOPE</Link></Button>
             </div>
           )}

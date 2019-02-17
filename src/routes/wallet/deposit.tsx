@@ -25,6 +25,9 @@ import Account from '../../stores/account';
 
 const { Fragment } = React;
 
+const mainnetLambda = "https://pz3ks5l8tb.execute-api.eu-west-1.amazonaws.com/mainnet/fund";
+const testnetLamdba = "https://c90vfqfc1l.execute-api.eu-west-1.amazonaws.com/testnet/fund";
+
 interface DepositProps {
   tokens?: Tokens;
   network?: Network;
@@ -90,7 +93,7 @@ export default class Deposit extends React.Component<DepositProps, any> {
     console.log(this.receipients);
     console.log(this.props.account.address);
     console.log(this.props.color);
-    return fetch("https://c90vfqfc1l.execute-api.eu-west-1.amazonaws.com/testnet/fund", {
+    return fetch(mainnetLambda, {
         method: "POST", 
         headers: {
             "Content-Type": "application/json",
