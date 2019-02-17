@@ -18,12 +18,15 @@ export default class Home extends React.Component {
             The catch is the Red Envelope gives you all of the gift, some of the gift or no gift at all. Try your luck on
             the app.
           </p>
-          <img src="https://s3-eu-west-1.amazonaws.com/redenvelope.me/qrcode.png" />
+          <img src="https://user-images.githubusercontent.com/659301/52917683-9c06d280-32ab-11e9-9957-0a30db18a3d4.png" />
           <p>
              Instructions: <br/>
              1.) Scan QR code with Status app <br/>
-             2.) Select "Open in Status"
+             2.) Install extension <br />
+             3.) Type /fundredenv {'{'}amountToGift{'}'} {'{'}numberOfRecipients{'}'} into a chat
           </p>
+          <a href="https://github.com/eshavkun/redenvelope-extension/files/2873294/Red.envelope-compressed.pdf">Presentation</a> <br/>
+          <a href="https://youtu.be/xst03mSqyx8">Video demo</a>
 
         </div>
       </AppLayout>
