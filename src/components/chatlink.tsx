@@ -20,8 +20,8 @@ export default class ChatLink extends React.Component<LinkProps> {
 
   render() {
     const style = {
-      height: "120px",
-      width: "200"
+      height: "90px",
+      width: "300px"
     }
     console.log(this.textArea);
     return(
