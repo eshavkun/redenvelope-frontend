@@ -39,12 +39,15 @@ const HexString: React.SFC<HexStringProps> = ({ children }) => {
 
   const width = String(children).length < 60 ? 450 : 600;
 
+  const style = {
+    color: "blue"
+  }
   return (
     <Fragment>
       {copied && <span className="copied-msg">Copied</span>}
       <MediaQuery minWidth={width}>{children}</MediaQuery>
       <MediaQuery maxWidth={width - 1}>
-        <span title={String(children)} onClick={handleCopy} >
+        <span title={String(children)} onClick={handleCopy} style={style} >
           {children}
         </span>
       </MediaQuery>

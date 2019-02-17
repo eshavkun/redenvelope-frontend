@@ -220,8 +220,10 @@ export default class Deposit extends React.Component<DepositProps, any> {
 
         {this.funded && (
           <Fragment>
-            Your envelope has been funded. Send this link into a chat: <br/>
-            <HexString>{"/postRE http://redenvelope.me/claim/" + this.wallet}</HexString>
+            Your envelope has been funded. <br />
+            1.) Touch the text below and it will get copied to clipboard. <br />
+            2.) Then paste this into a status chat. <br/>
+            <HexString>{"/fundredenv http://redenvelope.me/claim/" + this.wallet}</HexString>
           </Fragment>
         )}
       </Fragment>

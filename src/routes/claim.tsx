@@ -106,29 +106,33 @@ export default class Claim extends React.Component<ClaimProps> {
   render() {
     console.log(this.props.match.params.addr);
     console.log(this.props.account.address);
+
+    const style = {
+      width: "67%"
+    }
     return (
       <AppLayout section="claim">
         <div>
           {this.initing && (
             <div>
-              Opening your envelope... <br />
+              <h1> Opening your envelope... </h1> <br /> <br /> 
               <img src="https://s3-eu-west-1.amazonaws.com/redenvelope.me/ezgif.com-resize.gif" />
             </div>
           )}
           {(!this.initing && this.success) && (
             <div>
-              <h1> You got {Big(this.amount.toString() || 0).div(10 ** 18).toFixed()} LEAP! </h1> <br />
-              <img src="https://s3-eu-west-1.amazonaws.com/redenvelope.me/red+envelope4.jpg" /> <br />
-              <Button onClick={() => {window.location = "https://testnet.leapdao.org/wallet" as any}}> MANAGE FUNDS </Button>
-              <Button> <Link to={`/fundenvelope/0.01/3`}>FUND YOUR OWN </Link></Button>
+              <h1> You got {Big(this.amount.toString() || 0).div(10 ** 18).toFixed()} LEAP! </h1> <br /> <br />
+              <img src="https://s3-eu-west-1.amazonaws.com/redenvelope.me/red+envelope4.jpg" /> <br /> <br />
+              <Button style={style} onClick={() => {window.location = "https://testnet.leapdao.org/wallet" as any}}> MANAGE FUNDS </Button> <br /> <br />
+              <Button> <Link to={`/fundenvelope/0.01/3`}>FUND YOUR OWN ENVELOPE</Link></Button>
             </div>
           )}
           {(!this.initing && !this.success) && (
             <div>
-              <h1> Better luck next time! </h1>
-              <img src="https://i.kym-cdn.com/photos/images/newsfeed/000/096/044/trollface.jpg?1296494117" /> <br />
-              <Button onClick={() => {window.location = "https://testnet.leapdao.org/wallet" as any}}> MANAGE FUNDS </Button>
-              <Button> <Link to={`/fundenvelope/0.01/3`}>FUND YOUR OWN </Link></Button>
+              <h1> Better luck next time! </h1> <br /> <br />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7m3VLlfMcRJ2c-RlcXdAJk-PKqg5s9iAi3uLxiEnjPJq-bFGq" /> <br /> <br />
+              <Button style={style} onClick={() => {window.location = "https://testnet.leapdao.org/wallet" as any}}> MANAGE FUNDS </Button> <br /> <br />
+              <Button> <Link to={`/fundenvelope/0.01/3`}> FUND YOUR OWN ENVELOPE</Link></Button>
             </div>
           )}
         </div>
