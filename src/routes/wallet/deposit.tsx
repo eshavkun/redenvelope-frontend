@@ -20,6 +20,7 @@ import storage from '../../utils/storage';
 import Web3Store from '../../stores/web3';
 import EtherscanLink from '../../components/etherscanLink';
 import HexString from '../../components/hexString';
+import ChatLink from '../../components/chatlink';
 import Account from '../../stores/account';
 
 const { Fragment } = React;
@@ -221,9 +222,9 @@ export default class Deposit extends React.Component<DepositProps, any> {
         {this.funded && (
           <Fragment>
             Your envelope has been funded. <br />
-            1.) Touch the text below and it will get copied to clipboard. <br />
-            2.) Then paste this into a status chat. <br/>
-            <HexString>{"/fundredenv http://redenvelope.me/claim/" + this.wallet}</HexString>
+            1.) Copy the text bellow <br />
+            2.) Then paste this into a status chat. <br/> <br/>
+            <ChatLink text={"/postredenv http://redenvelope.me/claim/" + this.wallet} />
           </Fragment>
         )}
       </Fragment>

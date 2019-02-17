@@ -1,55 +1,47 @@
 import * as React from 'react';
-import MediaQuery from 'react-responsive';
 
-import { shortenHex } from '../utils';
+import { observer, inject } from 'mobx-react';
+
+import { computed, observable, reaction, autorun } from 'mobx';
+
+import { Form, Button, Table, Select } from 'antd';
 
 const { Fragment } = React;
 
-interface HexStringProps {}
-
-function copyToClipboard(text: string) {
-  const textArea = document.createElement('textarea');
-  textArea.value = text;
-  document.body.appendChild(textArea);
-  textArea.select();
-  const result = document.execCommand('copy');
-  document.body.removeChild(textArea);
-  return result;
+interface LinkProps {
+  text: string;
 }
 
-const ChatLink: React.SFC<HexStringProps> = ({ children }) => {
-  const [copied, setCopied] = React.useState(false);
-  const handleCopy = React.useCallback(() => {
-    if (copyToClipboard(String(children))) {
-      setCopied(true);
+@observer
+export default class ChatLink extends React.Component<LinkProps> {
+
+  @observable
+  textArea: any;
+
+  render() {
+    const style = {
+      height: "120px",
+      width: "200"
     }
-  }, [children]);
+    console.log(this.textArea);
+    return(
+      <Fragment>
+        <form>
+          <textarea
+            ref={(textarea) => this.textArea = textarea}
+            value={this.props.text}
+            style={style}
+          />
+        </form> <br />
+        <Button onClick={(e) => {
+          this.textArea.select();
+          document.execCommand('copy');
+          e.target.focus();
+        }}>
+          Copy
+        </Button>
+      </Fragment>
+    );
+  }
 
-  React.useEffect(() => {
-    if (copied) {
-      const timeout = setTimeout(() => {
-        setCopied(false);
-      }, 400);
-
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-  }, [copied]);
-
-  const width = String(children).length < 60 ? 450 : 600;
-
-  return (
-    <Fragment>
-      {copied && <span className="copied-msg">Copied</span>}
-      <MediaQuery minWidth={width}>{children}</MediaQuery>
-      <MediaQuery maxWidth={width - 1}>
-        <span title={String(children)} onClick={handleCopy}>
-          {shortenHex(children)}
-        </span>
-      </MediaQuery>
-    </Fragment>
-  );
-};
-
-export default ChatLink;
+}
